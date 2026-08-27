@@ -31,9 +31,11 @@
     --ridge: #D9601C;
     --rad: #B08D5F;
     --nodo: #EE7A33;
+    --ico-luna: inline;
+    --ico-sole: none;
   }
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
       --bg: #4A331F;
       --wm: #FBF1E2;
       --root: #F98B45;
@@ -51,7 +53,30 @@
       --ridge: #D9601C;
       --rad: #B08D5F;
       --nodo: #FBE7B8;
+      --ico-luna: none;
+      --ico-sole: inline;
     }
+  }
+  :root[data-theme="dark"] {
+    --bg: #4A331F;
+      --wm: #FBF1E2;
+      --root: #F98B45;
+      --claim: #E0CCB1;
+      --oo: #F98B45;
+      --motto: #F5E9D7;
+      --sub: #CDB699;
+      --pill: #EE7A33;
+      --pill-hover: #F98B45;
+      --foot: #9C8266;
+      --v1: #63BD7C;
+      --v2: #52AD6A;
+      --v3: #419C58;
+      --corpo: #F98B45;
+      --ridge: #D9601C;
+      --rad: #B08D5F;
+      --nodo: #FBE7B8;
+      --ico-luna: none;
+      --ico-sole: inline;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -130,9 +155,35 @@
   }
   a.mail:hover { background: var(--pill-hover); }
   footer { font-size: 12px; color: var(--foot); margin-top: 16px; }
+  .tema {
+    position: fixed;
+    top: max(16px, env(safe-area-inset-top));
+    right: max(16px, env(safe-area-inset-right));
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1.5px solid var(--foot);
+    background: transparent;
+    color: var(--claim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+    z-index: 10;
+  }
+  .tema:hover { border-color: var(--sub); }
+  .tema svg { width: 20px; height: 20px; }
+  .tema .luna { display: var(--ico-luna); }
+  .tema .sole { display: var(--ico-sole); }
 </style>
 </head>
 <body>
+  <button class="tema" type="button" aria-label="Cambia tema chiaro/scuro">
+    <svg class="luna" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 13.2A8.2 8.2 0 1 1 10.8 3.5a6.6 6.6 0 0 0 9.7 9.7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+    <svg class="sole" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5V5 M12 19v2.5 M2.5 12H5 M19 12h2.5 M5.3 5.3l1.8 1.8 M16.9 16.9l1.8 1.8 M18.7 5.3l-1.8 1.8 M7.1 16.9l-1.8 1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </button>
   <svg class="logo" viewBox="0 0 100 145" fill="none" aria-hidden="true">
     <g transform="rotate(-6 50 75)">
       <rect class="bar b1" x="35" y="20" width="7" height="15" rx="3.5"/>
@@ -145,9 +196,9 @@
         <path d="M50 107 L36 120 M50 107 L50 122 M50 107 L64 118" stroke-width="2.5" stroke-linecap="round"/>
         <path d="M36 120 L28 132 M36 120 L43 133 M64 118 L73 129" stroke-width="2" stroke-linecap="round"/>
         <circle cx="28" cy="132" r="3.4"/>
-        <circle cx="43" cy="133" r="2.9" opacity="0.8"/>
-        <circle cx="73" cy="129" r="3.1" opacity="0.85"/>
-        <circle cx="50" cy="122" r="2.7" opacity="0.6"/>
+        <circle cx="43" cy="133" r="2.9"/>
+        <circle cx="73" cy="129" r="3.1"/>
+        <circle cx="50" cy="122" r="2.7"/>
       </g>
     </g>
   </svg>
@@ -160,5 +211,30 @@
     ciao@caroota.it
   </a>
   <footer>&copy; 2026 caroota</footer>
+<script>
+(function () {
+  var root = document.documentElement;
+  var mq = window.matchMedia('(prefers-color-scheme: dark)');
+  try {
+    var salvato = localStorage.getItem('caroota-tema');
+    if (salvato === 'dark' || salvato === 'light') root.setAttribute('data-theme', salvato);
+  } catch (e) {}
+  function attivo() {
+    return root.getAttribute('data-theme') || (mq.matches ? 'dark' : 'light');
+  }
+  function metas(t) {
+    var c = t === 'dark' ? '#4A331F' : '#FBF5EC';
+    var ms = document.querySelectorAll('meta[name="theme-color"]');
+    for (var i = 0; i < ms.length; i++) ms[i].setAttribute('content', c);
+  }
+  document.querySelector('.tema').addEventListener('click', function () {
+    var prossimo = attivo() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', prossimo);
+    try { localStorage.setItem('caroota-tema', prossimo); } catch (e) {}
+    metas(prossimo);
+  });
+  if (root.getAttribute('data-theme')) metas(attivo());
+})();
+</script>
 </body>
 </html>
