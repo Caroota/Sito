@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny-ps" viewBox="0 0 512 512">
+<title>caroota</title>
+<desc>Logo caroota: una carota le cui radici formano un grafo di dati.</desc>
+<rect x="0" y="0" width="512" height="512" fill="#4A331F"/>
+<path d="M 193.5 114.6 L 196.4 142.4" fill="none" stroke="#63BD7C" stroke-width="24.5" stroke-linecap="round"/>
+<path d="M 226.8 79.4 L 233 138.6" fill="none" stroke="#52AD6A" stroke-width="24.5" stroke-linecap="round"/>
+<path d="M 260.5 47.6 L 269.6 134.7" fill="none" stroke="#419C58" stroke-width="24.5" stroke-linecap="round"/>
+<path d="M 174.9 188.7 Q 171.6 157.4 202.9 154.1 L 272.6 146.8 Q 304 143.5 307.3 174.8 C 315.3 251.5 284.1 356.9 269 397.2 Q 264.9 408.2 258.6 398.3 C 235.4 362 182.9 265.4 174.9 188.7 Z" fill="#F98B45"/>
+<path d="M 263.8 397.8 L 213.5 455.9" fill="none" stroke="#C9A87F" stroke-width="11.9" stroke-linecap="round"/>
+<path d="M 263.8 397.8 L 270.4 460.5" fill="none" stroke="#C9A87F" stroke-width="11.9" stroke-linecap="round"/>
+<path d="M 263.8 397.8 L 324.3 437.2" fill="none" stroke="#C9A87F" stroke-width="11.9" stroke-linecap="round"/>
+<circle cx="213.5" cy="455.9" r="16.1" fill="#FBE7B8"/>
+<circle cx="270.4" cy="460.5" r="16.1" fill="#FBE7B8"/>
+<circle cx="324.3" cy="437.2" r="16.1" fill="#FBE7B8"/>
+</svg>
